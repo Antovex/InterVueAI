@@ -1,9 +1,12 @@
+// import { Inter } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Button } from "@/components/ui/button";
 import { dummyInterviews } from "@/constants";
-import { Inter } from "next/font/google";
+
+import InterviewCard from "@/components/InterviewCard";
+import { Button } from "@/components/ui/button";
+
 
 const page = () => {
   return (
@@ -35,8 +38,10 @@ const page = () => {
 
         <div className="interviews-section">
           {dummyInterviews.map((interview) => (
-            <InterviewCard />
+            <InterviewCard key={interview.id} {...interview} />
           ))}
+
+          {/* <p>You havn&apos;t taken any interviews yet !</p> */}
         </div>
       </section>
 
@@ -44,7 +49,10 @@ const page = () => {
         <h2>Take an interview</h2>
 
         <div className="interviews-section">
-          <p>There are no interviews available</p>
+          {dummyInterviews.map((interview) => (
+            <InterviewCard key={interview.id} {...interview} />
+          ))}
+          {/* <p>There are no interviews available</p> */}
         </div>
       </section>
     </>
