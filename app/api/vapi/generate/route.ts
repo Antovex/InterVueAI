@@ -1,7 +1,8 @@
-import { db } from "@/firebase/admin";
-import { getRandomInterviewCover } from "@/lib/utils";
 import { google } from "@ai-sdk/google";
 import { generateText } from "ai";
+
+import { db } from "@/firebase/admin";
+import { getRandomInterviewCover } from "@/lib/utils";
 
 export async function GET() {
     return Response.json(
@@ -16,8 +17,11 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-    const { type, role, level, techstack, amount, userid } =
-        await request.json();
+    // const { type, role, level, techstack, amount, userid } =
+    //     await request.json();
+    const body = await request.json();
+    console.log("Received body from VAPI:", body);
+    const { type, role, level, techstack, amount, userid } = body;
 
     try {
         const { text: questions } = await generateText({
