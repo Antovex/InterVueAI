@@ -74,27 +74,60 @@ const Agent = ({ userName, userId, type }: AgentProps) => {
         if (callStatus === CallStatus.FINISHED) router.push("/");
     }, [messages, callStatus, type, userId]);
 
+    // const handleCall = async () => {
+    //     setCallStatus(CallStatus.CONNECTING);
+
+    //     try {
+    //         if (type === "generate") {
+    //             console.log(userId);
+    //             await vapi.start(
+    //                 undefined,
+    //                 {
+    //                     variableValues: { username: userName, userid: userId },
+    //                     // clientMessages: ["transcript"],
+    //                     // serverMessages: [],
+    //                 },
+    //                 undefined,
+    //                 process.env.NEXT_PUBLIC_VAPI_WORKFLOW_ID
+    //             );
+    //         }
+    //     } catch (error) {
+    //         console.error("Error starting call:", error);
+    //         setCallStatus(CallStatus.INACTIVE);
+    //     }
+    // };
+
     const handleCall = async () => {
         setCallStatus(CallStatus.CONNECTING);
 
-        try {
-            if (type === "generate") {
-                console.log(userId);
-                await vapi.start(
-                    undefined,
-                    {
-                        variableValues: { username: userName, userid: userId },
-                        // clientMessages: ["transcript"],
-                        // serverMessages: [],
+        if (type === "generate") {
+            await vapi.start(
+                undefined,
+                undefined,
+                undefined,
+                process.env.NEXT_PUBLIC_VAPI_WORKFLOW_ID!,
+                {
+                    variableValues: {
+                        username: userName,
+                        userid: userId,
                     },
-                    undefined,
-                    process.env.NEXT_PUBLIC_VAPI_WORKFLOW_ID
-                );
-            }
-        } catch (error) {
-            console.error("Error starting call:", error);
-            setCallStatus(CallStatus.INACTIVE);
-        }
+                }
+            );
+        } 
+        // else {
+        //     let formattedQuestions = "";
+        //     if (questions) {
+        //         formattedQuestions = questions
+        //             .map((question) => `- ${question}`)
+        //             .join("\n");
+        //     }
+
+        //     await vapi.start(interviewer, {
+        //         variableValues: {
+        //             questions: formattedQuestions,
+        //         },
+        //     });
+        // }
     };
 
     const handleDisconnect = async () => {
