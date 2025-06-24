@@ -3,12 +3,18 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { dummyInterviews } from "@/constants";
+import { getCurrentUser, getInterviewsByUserId } from "@/lib/actions/auth.action";
 
 import InterviewCard from "@/components/InterviewCard";
 import { Button } from "@/components/ui/button";
 
 
-const page = () => {
+const page = async () => {
+  const user = await getCurrentUser();
+  const userInterviews = await getInterviewsByUserId(user?.id!) || [];
+
+  const hasPastInterviews = userInterviews.length > 0;
+
   return (
     <>
       <section className="card-cta">
@@ -37,11 +43,14 @@ const page = () => {
         <h2>Your Interviews</h2>
 
         <div className="interviews-section">
-          {dummyInterviews.map((interview) => (
-            <InterviewCard key={interview.id} {...interview} />
-          ))}
+          {hasPastInterviews ? (
+            userInterviews?.map((interview) => (
+              <InterviewCard {...interview} key={interview.id}/>
+            ))
+          ) : (
+            <p>You haven&apos;t taken any interviews yet!</p>
+          )}
 
-          {/* <p>You havn&apos;t taken any interviews yet !</p> */}
         </div>
       </section>
 
