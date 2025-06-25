@@ -93,6 +93,19 @@ export async function signIn(params: SignInParams) {
     }
 }
 
+export async function signOut() {
+    const cookieStore = await cookies();
+    // Remove the session cookie by setting it to an empty value and expiring it immediately
+    cookieStore.set("session", "", {
+        maxAge: 0,
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        path: "/",
+        sameSite: "lax",
+    });
+    return { success: true, message: "Signed out successfully." };
+}
+
 export async function setSessionCookie(idToken: string) {
     const cookieStore = await cookies();
 
@@ -153,6 +166,25 @@ export async function getInterviewsByUserId(
         .collection("interviews")
         .where("userId", "==", userId)
         .orderBy("createdAt", "desc")
+        .get();
+
+    return interviews.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+    })) as Interview[];
+}
+
+export async function getLatestInterviews(
+    params: GetLatestInterviewsParams
+): Promise<Interview[] | null> {
+    const { userId, limit = 20 } = params;
+    
+    const interviews = await db
+        .collection("interviews")
+        .orderBy("createdAt", "desc")
+        .where("finalized", "==", true)
+        .where("userId", "!=", userId)
+        .limit(limit)
         .get();
 
     return interviews.docs.map((doc) => ({
