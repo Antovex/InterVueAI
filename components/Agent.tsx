@@ -5,9 +5,10 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
+import { interviewer } from "@/constants";
+import { createFeedback } from "@/lib/actions/general.action";
 import { cn } from "@/lib/utils";
 import { vapi } from "@/lib/vapi.sdk";
-import { interviewer } from "@/constants";
 
 enum CallStatus {
     ACTIVE = "ACTIVE",
@@ -81,10 +82,11 @@ const Agent = ({
         console.log("Generating feedback...");
 
         // TODO: Implement the actual feedback generation logic here.
-        const {success, id} = {
-            success: true,
-            id: "feedback-id-placeholder"
-        }
+        const {success, feedbackId: id} = await createFeedback({
+            interviewId: interviewId!,
+            userId: userId!,
+            transcript: messages,
+        })
 
         if(success && id) {
             console.log("Feedback generated successfully with ID:", id);
