@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 import { vapi } from "@/lib/vapi.sdk";
+import { interviewer } from "@/constants";
 
 enum CallStatus {
     ACTIVE = "ACTIVE",
@@ -20,7 +21,13 @@ interface SavedMessage {
     content: string;
 }
 
-const Agent = ({ userName, userId, type }: AgentProps) => {
+const Agent = ({
+    userName,
+    userId,
+    type,
+    interviewId,
+    questions,
+}: AgentProps) => {
     const router = useRouter();
     const [isSpeaking, setIsSpeaking] = useState(false);
     const [callStatus, setCallStatus] = useState<CallStatus>(
@@ -70,8 +77,32 @@ const Agent = ({ userName, userId, type }: AgentProps) => {
         };
     }, []);
 
+    const handleGenerateFeedback = async (messages: SavedMessage[]) => {
+        console.log("Generating feedback...");
+
+        // TODO: Implement the actual feedback generation logic here.
+        const {success, id} = {
+            success: true,
+            id: "feedback-id-placeholder"
+        }
+
+        if(success && id) {
+            console.log("Feedback generated successfully with ID:", id);
+            router.push(`/interview/${interviewId}/feedback`);
+        } else {
+            console.error("Failed to generate feedback.");
+            router.push('/');
+        }
+    }
+
     useEffect(() => {
-        if (callStatus === CallStatus.FINISHED) router.push("/");
+        if (callStatus === CallStatus.FINISHED) {
+            if (type === "generate") {
+                router.push("/");
+            } else {
+                handleGenerateFeedback(messages);
+            }
+        }
     }, [messages, callStatus, type, userId]);
 
     // const handleCall = async () => {
@@ -113,21 +144,20 @@ const Agent = ({ userName, userId, type }: AgentProps) => {
                     },
                 }
             );
-        } 
-        // else {
-        //     let formattedQuestions = "";
-        //     if (questions) {
-        //         formattedQuestions = questions
-        //             .map((question) => `- ${question}`)
-        //             .join("\n");
-        //     }
+        } else {
+            let formattedQuestions = "";
+            if (questions) {
+                formattedQuestions = questions
+                    .map((question) => `- ${question}`)
+                    .join("\n");
+            }
 
-        //     await vapi.start(interviewer, {
-        //         variableValues: {
-        //             questions: formattedQuestions,
-        //         },
-        //     });
-        // }
+            await vapi.start(interviewer, {
+                variableValues: {
+                    questions: formattedQuestions,
+                },
+            });
+        }
     };
 
     const handleDisconnect = async () => {
@@ -158,7 +188,7 @@ const Agent = ({ userName, userId, type }: AgentProps) => {
                     <h3>AI Interviewer</h3>
                 </div>
 
-                <div className="card-border">
+                {/* <div className="card-border">
                     <div className="card-content">
                         <Image
                             src="/user-avatar.png"
@@ -169,7 +199,7 @@ const Agent = ({ userName, userId, type }: AgentProps) => {
                         />
                         <h3>{userName}</h3>
                     </div>
-                </div>
+                </div> */}
             </div>
 
             {messages.length > 0 && (
