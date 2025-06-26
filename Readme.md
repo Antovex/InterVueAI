@@ -1,30 +1,51 @@
-# InterVueAI
+<div align="center">
+  <img src="public/logo.svg" alt="InterVueAI Logo" width="50" />
+  <h1>InterVueAI</h1>
+  <p><strong>AI-Powered Technical Interview Practice Platform</strong></p>
+</div>
+
+## Table of Contents
+
+1. 🚀 [Overview](#overview)
+2. 🛠️ [Tech Stack](#tech-stack)
+3. ✨ [Features](#features)
+4. 📁 [Project Structure](#project-structure)
+5. 🤸 [Quick Start](#quick-start)
+6. 📐 [Sequence Diagram](#sequence)
+7. 📜 [Scripts](#scripts)
+
+<hr />
+
+## <a name="overview">🚀 Overview</a>
 
 InterVueAI is an AI-powered platform for practicing mock interviews and receiving instant feedback. Built with Next.js, React, TypeScript, and Firebase, it provides a modern, interactive experience for users to prepare for technical interviews.
 
----
+## <a name="tech-stack">🛠️ Tech Stack</a>
 
-## Features
+- **Frontend:** [Next.js](https://nextjs.org/), [React](https://reactjs.org/), [TypeScript](https://www.typescriptlang.org/), [Tailwind CSS](https://tailwindcss.com/)
+- **Backend:** [Firebase](https://firebase.google.com/) (Auth, Firestore)
+- **UI Components:** [shadcn/ui](https://ui.shadcn.com/)
 
-- **AI-Powered Mock Interviews:** Practice interviews for various roles and tech stacks.
-- **Instant Feedback:** Get scores and assessments after each interview (planned).
-- **Tech Stack Icons:** Visual representation of technologies involved in each interview.
-- **Authentication:** Sign up and sign in with secure forms.
-- **Responsive UI:** Styled with Tailwind CSS and custom gradients.
-- **Firebase Integration:** User authentication and data storage.
+## <a name="features">✨ Features</a>
 
----
+- **🤖 AI-Powered Mock Interviews:** Practice interviews for various roles and tech stacks
+- **💬 Real-time Conversation:** Natural dialogue with AI interviewer using voice interactions
+- **📊 Detailed Feedback:** Get comprehensive scores and assessments after each interview
+- **🧩 Tech Stack Icons:** Visual representation of technologies involved in each interview
+- **🔐 Authentication:** Secure user authentication system
+- **📱 Responsive UI:** Styled with Tailwind CSS and custom gradients for a modern look
+- **🔥 Firebase Integration:** User authentication and data storage
 
-## Project Structure
+## <a name="project-structure">📁 Project Structure</a>
 
 ```
 ai_interviewer_intervueai/
-├── app/                # Next.js app directory (routing, layouts, pages)
-├── components/         # React components (UI, forms, interview cards, etc.)
-├── constants/          # Static data and mappings
+├── app/                # Next.js app directory
+├── components/         # React components
+├── constants/          # Static data
 ├── firebase/           # Firebase client and admin setup
-├── lib/                # Utility functions (e.g., tech icon mapping)
-├── public/             # Static assets (images, SVGs, etc.)
+├── lib/                # Utility functions
+├── public/             # Static assets
 ├── types/              # TypeScript type definitions
 ├── .env.local          # Environment variables (not committed)
 ├── package.json        # Project dependencies and scripts
@@ -34,45 +55,74 @@ ai_interviewer_intervueai/
 └── Readme.md           # Project documentation
 ```
 
----
-
-## Getting Started
+## <a name="quick-start">🤸 Quick Start</a>
 
 ### Prerequisites
-
 - Node.js (v18+ recommended)
-- Yarn or npm
+- npm or Yarn
+- Firebase account and project
 
-### Installation
+### 1. Clone the Repository
+```bash
+git clone https://github.com/Antovex/InterVueAI.git
+cd InterVueAI
+```
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/yourusername/InterVueAI.git
-   cd ai_interviewer_intervueai
-   ```
+### 2. Install Dependencies
+```bash
+npm install
+# or
+yarn install
+```
 
-2. **Install dependencies:**
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
+### 3. Set Up Firebase
+- Create a Firebase project at [Firebase Console](https://console.firebase.google.com/)
+- Enable Authentication (Email/Password) and Firestore Database
+- Create a web app in your Firebase project settings
+- Generate Firebase Admin SDK service account credentials
 
-3. **Set up environment variables:**
-   - Copy `.env.local.example` to `.env.local` and fill in your Firebase credentials and other secrets.
+### 4. Configure Environment Variables
+Create a `.env.local` file in the root directory using `.env.example` file
 
-4. **Run the development server:**
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   ```
+### 5. Run Development Server
+```bash
+npm run dev
+# or
+yarn dev
+```
 
-5. **Open [http://localhost:3000](http://localhost:3000) in your browser.**
+### 6. Open Your Browser
+Navigate to [http://localhost:3000](http://localhost:3000) to use the application
 
----
+### 7. Create an Account
+Sign up for a new account using the authentication form
 
-## Scripts
+### 8. Start Your First Interview
+- Select an interview type
+- Choose relevant tech stacks
+- Begin your AI-powered mock interview session
+
+### 9. View Feedback
+Complete the interview to receive detailed feedback and performance metrics
+
+## <a name="sequence">Sequence Diagram</a>
+#### Full Sequence Diagram: [.png format](Sequence_diagram.drawio.png) | [draw.io file (should be opened in draw.io website)](Sequence_diagram.drawio)
+
+<div align="center">
+  <img src="1.png" alt="InterVueAI Preview Part 1" width="800" />
+</div>
+<div align="center">
+  <img src="2.png" alt="InterVueAI Preview Part 2" width="800" />
+</div>
+<div align="center">
+  <img src="3.png" alt="InterVueAI Preview Part 3" width="800" />
+</div>
+<div align="center">
+  <img src="4.png" alt="InterVueAI Preview Part 4" width="800" />
+</div>
+
+
+## <a href="scripts">📜 Scripts</a>
 
 - `dev` - Start the development server
 - `build` - Build the application for production
@@ -80,66 +130,12 @@ ai_interviewer_intervueai/
 - `lint` - Run ESLint
 - `lint:fix` - Run ESLint and fix issues
 
----
-
-## Tech Stack
-
-- **Frontend:** Next.js, React, TypeScript, Tailwind CSS
-- **Backend:** Firebase (Auth, Firestore)
-- **UI Components:** shadcn/ui, Radix UI, Lucide Icons
-- **Form Validation:** React Hook Form, Zod
-- **Notifications:** Sonner
-
----
-
-## Folder Highlights
-
-- **`components/InterviewCard.tsx`**  
-  Displays interview details, tech stack icons, and feedback status.
-
-- **`components/AuthForm.tsx`**  
-  Handles user authentication (sign-in/sign-up) with validation.
-
-- **`components/DisplayTechIcons.tsx`**  
-  Dynamically fetches and displays tech stack icons.
-
-- **`lib/utils.ts`**  
-  Utility functions for class names, tech icon mapping, and random cover selection.
-
-- **`firebase/`**  
-  Firebase client and admin initialization.
-
-- **`constants/index.ts`**  
-  Static data for interviews, tech mappings, and covers.
-
----
-
-## Customization
-
-- **Add new interview covers:**  
-  Place new images in `public/covers/` and update the `interviewCovers` array in `constants/index.ts`.
-
-- **Add new tech mappings:**  
-  Update the `mappings` object in `constants/index.ts` for new technologies.
-
----
-
 ## Contributing
 
 Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
-
----
-
-## License
-
-[MIT](LICENSE)
-
----
 
 ## Acknowledgements
 
 - [Next.js](https://nextjs.org/)
 - [shadcn/ui](https://ui.shadcn.com/)
 - [Firebase](https://firebase.google.com/)
-- [Radix UI](https://www.radix-ui.com/)
-- [Lucide Icons](https://lucide.dev/)
