@@ -7,18 +7,29 @@
 ## Table of Contents
 
 1. 🚀 [Overview](#overview)
-2. 🛠️ [Tech Stack](#tech-stack)
-3. ✨ [Features](#features)
-4. 📁 [Project Structure](#project-structure)
-5. 🤸 [Quick Start](#quick-start)
-6. 📐 [Sequence Diagram](#sequence)
-7. 📜 [Scripts](#scripts)
+2. 👀 [Demo](#demo)
+3. 🛠️ [Tech Stack](#tech-stack)
+4. ✨ [Features](#features)
+5. 📁 [Project Structure](#project-structure)
+6. 🤸 [Quick Start](#quick-start)
+7. 📐 [Sequence Diagram](#sequence)
+8. 📜 [Scripts](#scripts)
 
 <hr />
 
 ## <a name="overview">🚀 Overview</a>
 
 InterVueAI is an AI-powered platform for practicing mock interviews and receiving instant feedback. Built with Next.js, React, TypeScript, and Firebase, it provides a modern, interactive experience for users to prepare for technical interviews.
+
+## <a name="demo">👀 Demo</a>
+
+#### Login & Root Page view
+![Login & Root Page view](https://github.com/Antovex/InterVueAI/blob/master/root_page.gif)
+
+#### Take the interview & check feedback
+![Take the interview & check feedback](https://github.com/Antovex/InterVueAI/blob/master/view_and_feedback.gif)
+
+#### Pressing the "Call" button initiates the interview, where the AI interviewer asks questions verbally and listens to spoken responses from the user.
 
 ## <a name="tech-stack">🛠️ Tech Stack</a>
 
